@@ -11,21 +11,45 @@ const twit = new Twit({
 
 const Twitter = {
   post: (status_tweet) => {
-    update({ status: status_tweet.getText() });
+    update({ status: status_tweet.getText(), image: status_tweet.getImage() });
   },
 
   reply: (reply_tweet) => {
     update({ status: reply_tweet.getText(), in_reply_to_status_id: reply_tweet.getInReplyToStatusID() });
   },
 
+//returns event listener
   stream: () => {
     return twit.stream('user');
   }
 };
 
+//makes a new tweet
 function update(params) {
-  twit.post('statuses/update', params, (error) => {
-    error && console.error(error);
+  
+  twit.post('media/upload', params.image, function (err, data, response) {
+    if (err){
+      console.log('ERROR:');
+      console.log(err);
+    }
+    else{
+      console.log('Image uploaded!');
+      console.log('tweeting...');
+
+      T.post('statuses/update', {
+        media_ids: new Array(data.media_id_string)
+      },
+        function(err, data, response) {
+          if (err){
+            console.log('ERROR:');
+            console.log(err);
+          }
+          else{
+            console.log('Posted an image!');
+          }
+        }
+      );
+    }
   });
 }
 

@@ -7,6 +7,7 @@ const RequestTweet = require('../src/tweets/request_tweet');
 
 let stream = Twitter.stream();
 
+//payload execute when the bot gets a tweet
 stream.on('tweet', (payload) => {
   let request_tweet = new RequestTweet(payload);
 

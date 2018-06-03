@@ -8,7 +8,7 @@ class RequestTweet {
   shouldReply() {
     return this.isMentioned() && !this.isRetweet();
   }
-
+//returns emoji in text
   getText() {
     return this.payload.text;
   }
@@ -20,7 +20,7 @@ class RequestTweet {
   getScreenName() {
     return this.payload.user.screen_name;
   }
-
+//check if the the bot was tweeted
   isMentioned(screen_name) {
     screen_name = screen_name || process.env.TWITTER_SCREEN_NAME;
     let mentions = this.payload.entities.user_mentions;
@@ -29,7 +29,7 @@ class RequestTweet {
       return mention.screen_name === screen_name;
     });
   }
-
+//check if the bot has reply to tweet
   isRetweet() {
     return !!this.payload.retweeted_status;
   }

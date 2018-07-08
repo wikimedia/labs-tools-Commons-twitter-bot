@@ -2,4 +2,6 @@
 
 echo 'Starting Twitter reply process'
 
+
+//NODE_DEBUG=http,net,tls
 node script/reply.js

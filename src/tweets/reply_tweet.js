@@ -8,8 +8,10 @@ class ReplyTweet {
     this.image = image;
   }
 
-  getText() {
-    return `@${this.request_tweet.getScreenName()} ${this.getEmojiWithModifier()} ${this.image.toString()}`;
+  async getText() {
+    let image_object = await this.image;
+    let modifier = findModifier(hello.key, this.request_tweet.getText());
+    return modifier ? `@${this.request_tweet.getScreenName()} ${image_object.key + modifier} ${image_object.url}` : `@${this.request_tweet.getScreenName()} ${image_object.key} ${image_object.url}`;
   }
 
   /**

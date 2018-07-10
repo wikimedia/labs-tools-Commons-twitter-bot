@@ -28,7 +28,6 @@ class Images {
 
     let key = keys.find((key) => {
       key = getBaseCodepoint(key);
-
       return text.indexOf(key) !== -1;
     });
 
@@ -42,10 +41,12 @@ function getImage(records, key) {
 
   if (urls === undefined) {
     return null; // record not found
+	console.log(key);
   } else if (urls.length === 0) {
+	console.log(key);
     return new ImageIncomplete(key);
   }
-
+	console.log(key);
   let url = randomMember(urls);
   console.log(url)
 

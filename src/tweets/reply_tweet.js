@@ -10,7 +10,7 @@ class ReplyTweet {
 
   async getText() {
     let image_object = await this.image;
-    let modifier = findModifier(hello.key, this.request_tweet.getText());
+    let modifier = findModifier(image_object.key, this.request_tweet.getText());
     return modifier ? `@${this.request_tweet.getScreenName()} ${image_object.key + modifier} ${image_object.url}` : `@${this.request_tweet.getScreenName()} ${image_object.key} ${image_object.url}`;
   }
 
@@ -27,6 +27,9 @@ class ReplyTweet {
   getInReplyToStatusID() {
     return this.request_tweet.getStatusID();
   }
+  replyScreenName(){
+ 	return `@${this.request_tweet.getScreenName()}`;
+ }
 }
 
 module.exports = ReplyTweet;

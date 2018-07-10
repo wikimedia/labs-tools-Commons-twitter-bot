@@ -19,7 +19,7 @@ const Twitter = {
       reply_tweet.image.then(async function(value){
        // console.log(reply_tweet.getEmojiWithModifier());
         let status_update = await reply_tweet.getText();
-        update({ status: status_update+" "+value.key, image: value.image, in_reply_to_status_id: reply_tweet.getInReplyToStatusID() });
+        update({ status: status_update, in_reply_to_name: reply_tweet.replyScreenName(), key: value.key, image: value.image, in_reply_to_status_id: reply_tweet.getInReplyToStatusID() });
       });
     }catch(err){
       console.log(err);
@@ -33,9 +33,24 @@ const Twitter = {
 };
 
 //makes a new tweet
-function update(params) {
-  
-  twit.post('media/upload', params.image, function (err, data, response) {
+async function update(params) {
+  var param = await params;
+  console.log(param);
+  if(!param.image){
+   console.log("it null true true");
+   twit.post('statuses/update', {status: param.in_reply_to_name+" Sorry no image found for "+param.key+" emoji or emoji is blocked", in_reply_to_status_id: param.in_reply_to_status_id},
+	function(err, data, response) {
+          if (err){
+            console.log('ERROR:');
+            console.log(err);
+          }
+          else{
+            console.log('Posted an reply');
+          }
+	}	
+   );
+  }else{
+  twit.post('media/upload', {media_data: param.image}, function (err, data, response) {
     if (err){
       console.log('ERROR:');
       console.log(err);
@@ -60,7 +75,7 @@ function update(params) {
         }
       );
     }
-  });
+  });}
 }
 
 module.exports = Twitter;

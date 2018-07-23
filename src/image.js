@@ -2,10 +2,11 @@
 var fs = require('fs');
 
 class Image {
-  constructor(key, url, image) {
+  constructor(key, url, image, author) {
     this.key = key;
     this.url = url;
     this.image = image;
+    this.author = author;
   }
 
   getKey() {
@@ -18,6 +19,9 @@ class Image {
 
   getImage() {
     return this.image;
+  }
+  getAuthor(){
+    return this.author;
   }
 }
 

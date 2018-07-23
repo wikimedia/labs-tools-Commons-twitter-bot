@@ -1,6 +1,6 @@
 'use strict';
 
-const Twit = require('twit');
+var Twit = require('twit');
 
 const twit = new Twit({
   consumer_key: process.env.TWITTER_CONSUMER_KEY,
@@ -10,8 +10,15 @@ const twit = new Twit({
 });
 
 const Twitter = {
-  post: (status_tweet) => {
-    update({ status: status_tweet.getText(), image: status_tweet.getImage() });
+  post: async (status_tweet) => {
+   try{
+    status_tweet.image.then(function(value) {
+      update({ status:value.key + value.url, image:value.image });
+    });
+   }
+   catch (err){
+    console.log(err);
+   } 
   },
 
   reply: async (reply_tweet) => {
@@ -19,7 +26,8 @@ const Twitter = {
       reply_tweet.image.then(async function(value){
        // console.log(reply_tweet.getEmojiWithModifier());
         let status_update = await reply_tweet.getText();
-        update({ status: status_update, in_reply_to_name: reply_tweet.replyScreenName(), key: value.key, image: value.image, in_reply_to_status_id: reply_tweet.getInReplyToStatusID() });
+        update({ status: status_update, in_reply_to_name: reply_tweet.replyScreenName(), 
+          key: value.key, image: value.image, in_reply_to_status_id: reply_tweet.getInReplyToStatusID() });
       });
     }catch(err){
       console.log(err);
@@ -37,9 +45,9 @@ async function update(params) {
   var param = await params;
   console.log(param);
   if(!param.image){
-   console.log("it null true true");
+   console.log("Image not defined");
    twit.post('statuses/update', {status: param.in_reply_to_name+" Sorry no image found for "+param.key+" emoji or emoji is blocked", in_reply_to_status_id: param.in_reply_to_status_id},
-	function(err, data, response) {
+  function(err, data, response) {
           if (err){
             console.log('ERROR:');
             console.log(err);
@@ -47,7 +55,7 @@ async function update(params) {
           else{
             console.log('Posted an reply');
           }
-	}	
+  } 
    );
   }else{
   twit.post('media/upload', {media_data: param.image}, function (err, data, response) {

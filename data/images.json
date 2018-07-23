@@ -151,7 +151,7 @@
     ],
     "🦓": [
         "https://commons.wikimedia.org/wiki/File:Equus_zebra_hartmannae_-_Etosha_2015.jpg",
-        "https://commons.wikimedia.org/wiki/File:Zebra_2013_10_06_1274.jpge",
+        "https://commons.wikimedia.org/wiki/File:Zebra_2013_10_06_1274.jpg",
         "https://commons.wikimedia.org/wiki/File:Zebras_Ngorongoro_Crater.jpg",
         "https://commons.wikimedia.org/wiki/File:Zebra.zoo.750pix.jpg",
         "https://commons.wikimedia.org/wiki/File:Burchell%27s_zebra_(Equus_quagga_burchellii)_head.jpg"
@@ -3574,15 +3574,14 @@
         "https://commons.wikimedia.org/wiki/File:Binod_Photo.jpg"
     ],
     "😏": [
-        "https://digitalcollections.nypl.org/items/70833100-aafa-0132-1ad3-58d385a7bbd0",
-        "https://digitalcollections.nypl.org/items/5e66b3e9-244e-d471-e040-e00a180654d7"
+        "https://commons.wikimedia.org/wiki/File:Smiling_Lao_girl_in_the_sunshine.jpg"
     ],
     "😐": [
         "https://digitalcollections.nypl.org/items/510d47e4-52d4-a3d9-e040-e00a18064a99",
         "https://digitalcollections.nypl.org/items/510d47e2-f72f-a3d9-e040-e00a18064a99"
     ],
     "😑": [
-        "https://digitalcollections.nypl.org/items/510d47df-a3fd-a3d9-e040-e00a18064a99"
+        "https://commons.wikimedia.org/wiki/File:Smiling_Lao_girl_in_the_sunshine.jpg"
     ],
     "😒": [
         "https://digitalcollections.nypl.org/items/510d47e1-784c-a3d9-e040-e00a18064a99",
@@ -3677,8 +3676,8 @@
         "https://digitalcollections.nypl.org/items/b153a765-7f92-f909-e040-e00a18062ff0"
     ],
     "😭": [
-        "https://commons.wikimedia.org/wiki/File:Baby_yelling.jpg",
-        "https://commons.wikimedia.org/wiki/File:Cry-baby.jpg"
+        ["https://commons.wikimedia.org/wiki/File:Baby_yelling.jpg", "by Dave Buchwald, under the Creative Commons Attribution-Share Alike 3.0 Unported license."],
+        ["https://commons.wikimedia.org/wiki/File:Cry-baby.jpg", "by Beth, under the Creative Commons Attribution 2.0 Generic license"]
     ],
     "😮": [
         "https://digitalcollections.nypl.org/items/aa16d2ae-75c7-3443-e040-e00a18067692",

@@ -1,7 +1,7 @@
 'use strict';
 var fs = require('fs'),
 path = require('path'),
-request = require('request');
+request= require('request-promise');
 const data = require('../data/images');
 const blacklist = require('../data/blacklist');
 const Image = require('./image');
@@ -15,63 +15,69 @@ class Images {
     this.records = records || data;
   }
 
-  getRandom() {
+   getRandom() {
     let completeKeys = getCompleteKeys(this.records);
     let allowedKeys = getAllowedKeys(completeKeys);
     let key = randomMember(allowedKeys);
-
+    console.log("emogi in text: " + key);
+    key = "🦋";
     return getImage(this.records, key);
   }
 //returns image object and takes emoji.text as param
-  getFromText(text) {
+   getFromText(text) {
     let keys = getSortedKeys(this.records);
-
+    console.log("text sent to getFroTtext: " + text);
     let key = keys.find((key) => {
       key = getBaseCodepoint(key);
       return text.indexOf(key) !== -1;
     });
 
+    console.log("emogi in text: " + key);
     return getImage(this.records, key);
   }
 }
 
 /*return randomly selected an object image */
-function getImage(records, key) {
+async function getImage(records, key) {
+  var response, image;
   let urls = records[key];
 
   if (urls === undefined) {
     return null; // record not found
-	console.log(key);
+  console.log(key);
   } else if (urls.length === 0) {
-	console.log(key);
+  console.log(key);
     return new ImageIncomplete(key);
   }
-	console.log(key);
+  console.log(key);
   let url = randomMember(urls);
-  console.log(url)
-
+  console.log(url[1])
   //split url to have the file name
-  let image_name = url.split(":");
-
+  let image_name = url[0].split(":");
   //build api query
   let query = "https://commons.wikimedia.org/w/api.php?action=query&format=json&formatversion=2&prop=imageinfo&iiprop=url&iiurlwidth=500&iiurlheight=500&titles=File:" + image_name[2];
-  
-  request(query, { json: true }, (err, res, body) => {
-    if (err) { return console.log(err); }
-    console.log(query);
-      //image url
-    console.log(body.query.pages[0].imageinfo[0].url);
+  console.log(query);
+  console.log("before request");
+  try{
+    response = await request(query, { json: true }, logUrl);
+  }catch(err){
+    console.log("Response error:");
+    console.log(err);
+  }
+  try{
+    image = await request.get({url:response.query.pages[0].imageinfo[0].thumburl, encoding: 'base64'}, logUrl);
+  }catch(err){
+    console.log("save error: ")
+    console.log(err);
+  }
 
-    //download image with fix size(w:500, h:500)
-    download(body.query.pages[0].imageinfo[0].thumburl, body.query.pages[0].title, function(){
-      console.log('done');
-    });
+  return new Image(key, url[0], image, url[1]);
+}
 
-  });
-  //var image_path = path.join(__dirname, '../data/ImagesDownloaded/' + image_name[2]),
-  //image = fs.readFileSync(image_path, { encoding: 'base64' });
-
-  return new Image(key, url, image_name[2]);
+function logUrl(err, res, body){
+  if (err) { return console.log(err); }
+  //image url
+  console.log("Processing requests...");
 }
 
 /*returns one random image url from an array of urls */
@@ -98,14 +104,6 @@ function getSortedKeys(records) {
     .thenBy((a, b) => { return records[b].length - records[a].length; })
   );
 }
-function download(uri, filename, callback){
-  request.head(uri, function(err, res, body){
-    console.log('content-type:', res.headers['content-type']);
-    console.log('content-length:', res.headers['content-length']);
-
-    request(uri).pipe(fs.createWriteStream('data/ImagesDownloaded'+filename)).on('close', callback);
-  });
-};
 
 /**
  * Get the base codepoint, without the VS16 variation selector
@@ -117,6 +115,13 @@ function download(uri, filename, callback){
  *
  * @param  {String} character
  * @return {String}
+ */
+function getBaseCodepoint(character) {
+  return character.replace(VARIATION_SELECTOR_MATCHER, '');
+}
+
+module.exports = Images;
+ @return {String}
  */
 function getBaseCodepoint(character) {
   return character.replace(VARIATION_SELECTOR_MATCHER, '');

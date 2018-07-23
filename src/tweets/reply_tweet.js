@@ -11,16 +11,16 @@ class ReplyTweet {
   async getText() {
     let image_object = await this.image;
     let modifier = findModifier(image_object.key, this.request_tweet.getText());
-    return modifier ? `@${this.request_tweet.getScreenName()} ${image_object.key + modifier} ${image_object.url}` : `@${this.request_tweet.getScreenName()} ${image_object.key} ${image_object.url}`;
+    return modifier ? `@${this.request_tweet.getScreenName()} ${image_object.key + modifier} ${image_object.url} ${image_object.author}` : `@${this.request_tweet.getScreenName()} ${image_object.key} ${image_object.url} ${image_object.author}`;
   }
 
   /**
    * If a Fitzpatrick modifier is found in the request tweet, combines it with the image key
    */
-  getEmojiWithModifier() {
-    let key = this.image.getKey();
+  async getEmojiWithModifier() {
+    let hello = await this.image;
+    let key = hello.key;
     let modifier = findModifier(key, this.request_tweet.getText());
-
     return modifier ? (key + modifier) : key;
   }
 
@@ -28,7 +28,7 @@ class ReplyTweet {
     return this.request_tweet.getStatusID();
   }
   replyScreenName(){
- 	return `@${this.request_tweet.getScreenName()}`;
+  return `@${this.request_tweet.getScreenName()}`;
  }
 }
 

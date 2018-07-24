@@ -1,3 +1,7 @@
+/*
+*This script executes the bot reply
+*/
+
 'use strict';
 
 const Images = require('../src/images');
@@ -7,10 +11,10 @@ const RequestTweet = require('../src/tweets/request_tweet');
 
 let stream = Twitter.stream();
 
-//payload execute when the bot gets a tweet
+/*payload execute after an event tweet*/
 stream.on('tweet', (payload) => {
   let request_tweet = new RequestTweet(payload);
-
+/*if tweet is eligible to a reply, reply to tweet*/
   if (request_tweet.shouldReply()) {
     let image = new Images().getFromText(request_tweet.getText());
     if (!image) { return; }

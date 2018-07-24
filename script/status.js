@@ -1,3 +1,6 @@
+/*
+*Script executing the bot status uodate on twitter acount
+*/
 'use strict';
 
 const Images = require('../src/images');

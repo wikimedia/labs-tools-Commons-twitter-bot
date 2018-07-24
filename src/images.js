@@ -14,24 +14,22 @@ class Images {
   constructor (records) {
     this.records = records || data;
   }
-
+/* return a randomly selected emoji*/
    getRandom() {
     let completeKeys = getCompleteKeys(this.records);
     let allowedKeys = getAllowedKeys(completeKeys);
     let key = randomMember(allowedKeys);
     console.log("emogi in text: " + key);
-    key = "🦋";
     return getImage(this.records, key);
   }
-//returns image object and takes emoji.text as param
+/*returns image object and takes emoji.text as param*/
    getFromText(text) {
     let keys = getSortedKeys(this.records);
-    console.log("text sent to getFroTtext: " + text);
+    console.log("text sent to getFromTtext: " + text);
     let key = keys.find((key) => {
       key = getBaseCodepoint(key);
       return text.indexOf(key) !== -1;
     });
-
     console.log("emogi in text: " + key);
     return getImage(this.records, key);
   }
@@ -59,12 +57,14 @@ async function getImage(records, key) {
   console.log(query);
   console.log("before request");
   try{
+    //query the commons api and get the response in json
     response = await request(query, { json: true }, logUrl);
   }catch(err){
     console.log("Response error:");
     console.log(err);
   }
   try{
+    //red through the json response and get the image in base 64
     image = await request.get({url:response.query.pages[0].imageinfo[0].thumburl, encoding: 'base64'}, logUrl);
   }catch(err){
     console.log("save error: ")
@@ -73,10 +73,9 @@ async function getImage(records, key) {
 
   return new Image(key, url[0], image, url[1]);
 }
-
+/* request call back function*/
 function logUrl(err, res, body){
   if (err) { return console.log(err); }
-  //image url
   console.log("Processing requests...");
 }
 
@@ -115,13 +114,6 @@ function getSortedKeys(records) {
  *
  * @param  {String} character
  * @return {String}
- */
-function getBaseCodepoint(character) {
-  return character.replace(VARIATION_SELECTOR_MATCHER, '');
-}
-
-module.exports = Images;
- @return {String}
  */
 function getBaseCodepoint(character) {
   return character.replace(VARIATION_SELECTOR_MATCHER, '');

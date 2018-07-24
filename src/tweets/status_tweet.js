@@ -6,7 +6,7 @@ class StatusTweet {
     this.image = image;
   }
 
-//return image key and url
+/*return image key and url*/
   getText() {
     return `${this.image.getKey()} ${this.image.toString()}`;
   }

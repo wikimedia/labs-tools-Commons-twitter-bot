@@ -1,5 +1,4 @@
 'use strict';
-var fs = require('fs');
 
 /* Image class holding all information about the image*/
 class Image {

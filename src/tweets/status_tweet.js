@@ -11,7 +11,7 @@ class StatusTweet {
     return `${this.image.getKey()} ${this.image.toString()}`;
   }
   getImage(){
-  	return `${this.image.getImage()}`;
+    return `${this.image.getImage()}`;
   }
 }
 

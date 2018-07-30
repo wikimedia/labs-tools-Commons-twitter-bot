@@ -1,6 +1,5 @@
 'use strict';
-var fs = require('fs'),
-path = require('path'),
+var path = require('path'),
 request= require('request-promise');
 const data = require('../data/images');
 const blacklist = require('../data/blacklist');

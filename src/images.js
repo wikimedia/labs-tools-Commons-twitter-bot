@@ -36,7 +36,7 @@ class Images {
 
 /*return randomly selected an object image */
 async function getImage(records, key) {
-  var response, image;
+  var response, image, response2, image_license, image_Author;
   let urls = records[key];
 
   if (urls === undefined) {
@@ -48,29 +48,36 @@ async function getImage(records, key) {
   }
   console.log(key);
   let url = randomMember(urls);
-  console.log(url[1])
   //split url to have the file name
-  let image_name = url[0].split(":");
-  //build api query
+  let image_name = url.split(":");
+  //build api query to get the image url
   let query = "https://commons.wikimedia.org/w/api.php?action=query&format=json&formatversion=2&prop=imageinfo&iiprop=url&iiurlwidth=500&iiurlheight=500&titles=File:" + image_name[2];
-  console.log(query);
-  console.log("before request");
+  //build api query to get the image author and lisence
+  let query2 = "https://commons.wikimedia.org/w/api.php?action=query&format=json&formatversion=2&prop=imageinfo&iiprop=url&titles=File:" + image_name[2] + "&iiprop=extmetadata";
   try{
     //query the commons api and get the response in json
     response = await request(query, { json: true }, logUrl);
+    //auery commons api and get response in json
+    response2 = await request(query2, { json:true }, logUrl);
   }catch(err){
     console.log("Response error:");
     console.log(err);
   }
   try{
-    //red through the json response and get the image in base 64
+    //read through the json response and get the image in base 64
     image = await request.get({url:response.query.pages[0].imageinfo[0].thumburl, encoding: 'base64'}, logUrl);
+    //read through the response and get the license and author information
+    image_license = response2.query.pages[0].imageinfo[0].extmetadata.LicenseShortName.value;
+    // BUG: this image_author value is in html and should be corrected.
+    image_Author = response2.query.pages[0].imageinfo[0].extmetadata.Artist.value;
   }catch(err){
     console.log("save error: ")
     console.log(err);
   }
 
-  return new Image(key, url[0], image, url[1]);
+  let signature = "By "+image_Author+" Under "+image_license;
+
+  return new Image(key, url, image, signature);
 }
 /* request call back function*/
 function logUrl(err, res, body){

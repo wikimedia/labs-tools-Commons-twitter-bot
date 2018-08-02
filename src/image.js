@@ -2,11 +2,11 @@
 
 /* Image class holding all information about the image*/
 class Image {
-  constructor(key, url, image, author) {
+  constructor(key, url, image, signature) {
     this.key = key;
     this.url = url;
     this.image = image;
-    this.author = author;
+    this.author = signature;
   }
 /*returns an emoji*/
   getKey() {

@@ -3676,8 +3676,8 @@
         "https://digitalcollections.nypl.org/items/b153a765-7f92-f909-e040-e00a18062ff0"
     ],
     "😭": [
-        ["https://commons.wikimedia.org/wiki/File:Baby_yelling.jpg", "by Dave Buchwald, under the Creative Commons Attribution-Share Alike 3.0 Unported license."],
-        ["https://commons.wikimedia.org/wiki/File:Cry-baby.jpg", "by Beth, under the Creative Commons Attribution 2.0 Generic license"]
+        "https://commons.wikimedia.org/wiki/File:Baby_yelling.jpg",
+        "https://commons.wikimedia.org/wiki/File:Cry-baby.jpg"
     ],
     "😮": [
         "https://digitalcollections.nypl.org/items/aa16d2ae-75c7-3443-e040-e00a18067692",

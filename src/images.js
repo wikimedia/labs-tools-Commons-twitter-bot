@@ -36,53 +36,81 @@ class Images {
 
 /*return randomly selected an object image */
 async function getImage(records, key) {
-  var response, image, response2, image_license, image_Author;
+  var response, image, response2, image_license;
+  var parse_wikitext, response3;
   let urls = records[key];
 
   if (urls === undefined) {
     return null; // record not found
-  console.log(key);
   } else if (urls.length === 0) {
-  console.log(key);
     return new ImageIncomplete(key);
   }
-  console.log(key);
+
   let url = randomMember(urls);
   //split url to have the file name
   let image_name = url.split(":");
   //build api query to get the image url
   let query = "https://commons.wikimedia.org/w/api.php?action=query&format=json&formatversion=2&prop=imageinfo&iiprop=url&iiurlwidth=500&iiurlheight=500&titles=File:" + image_name[2];
-  //build api query to get the image author and lisence
+  //build api query to get the image lisence
   let query2 = "https://commons.wikimedia.org/w/api.php?action=query&format=json&formatversion=2&prop=imageinfo&iiprop=url&titles=File:" + image_name[2] + "&iiprop=extmetadata";
-  try{
+  //build api query to get the image author
+  let query3 = "https://commons.wikimedia.org/w/api.php?action=parse&format=json&formatversion=2&prop=wikitext&page=File:" + image_name[2];
+
+  try {
     //query the commons api and get the response in json
     response = await request(query, { json: true }, logUrl);
-    //auery commons api and get response in json
     response2 = await request(query2, { json:true }, logUrl);
-  }catch(err){
+    response3 = await request(query3, {json:true}, logUrl);
+  }catch(err) {
     console.log("Response error:");
     console.log(err);
   }
-  try{
+
+  try {
     //read through the json response and get the image in base 64
     image = await request.get({url:response.query.pages[0].imageinfo[0].thumburl, encoding: 'base64'}, logUrl);
     //read through the response and get the license and author information
     image_license = response2.query.pages[0].imageinfo[0].extmetadata.LicenseShortName.value;
-    // BUG: this image_author value is in html and should be corrected.
-    image_Author = response2.query.pages[0].imageinfo[0].extmetadata.Artist.value;
-  }catch(err){
+    //read through the reponse and get the wikitext that contains the author name.
+    parse_wikitext = response3.parse.wikitext;
+  }catch(err) {
     console.log("save error: ")
     console.log(err);
   }
-
-  let signature = "By "+image_Author+" Under "+image_license;
+  console.log("before getImageAuthor");
+  let image_Author = getImageAuthor(parse_wikitext);
+  console.log("after console.log");
+  let signature = "By "+image_Author+" under "+image_license;
 
   return new Image(key, url, image, signature);
 }
-/* request call back function*/
-function logUrl(err, res, body){
+
+/*request call back function*/
+function logUrl(err, res, body) {
   if (err) { return console.log(err); }
   console.log("Processing requests...");
+}
+
+/*returns the author name from the wikitext of the image page*/
+function getImageAuthor(wikitext) {
+  //return if wikitext is empty
+  if(!wikitext) {
+    return "Undefined Author";
+  }
+  //store all parameters in an array
+  let parameters = wikitext.split('|');
+  //loop trough the array and return the value of the author
+  var index;
+  for(index = 0; index < parameters.length; index++) {
+    if(parameters[index].search("Author") != -1 || parameters[index].search("author") != -1) {
+      //Bug: Can use regular expresions to eliminate all un necesary characters.
+      let parameter = parameters[index].replace("[", "");
+      parameter = parameter.replace("]", "");
+      let author = parameter.split("=");
+      return author[1];
+    }
+  }
+
 }
 
 /*returns one random image url from an array of urls */

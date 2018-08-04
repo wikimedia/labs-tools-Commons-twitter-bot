@@ -54,7 +54,7 @@ Emoji additions, bug reports, fixes, and new features are welcomed. If you'd lik
 		==The structure of the json==
 		```
 		"emoji":[
-					["Image_url X", "Image_author X under License X"] 
+					"Image_url" 
 				]
 		```
 3. Submit a patch to the gerrit repo

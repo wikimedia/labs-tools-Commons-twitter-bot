@@ -1,5 +1,0 @@
-#!/bin/bash
-
-echo 'Starting Twitter missing process'
-
-node script/missing.js

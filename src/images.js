@@ -77,9 +77,9 @@ async function getImage(records, key) {
     console.log("save error: ")
     console.log(err);
   }
-  let licence_url = response2.query.pages[0].imageinfo[0].extmetadata.licenceUrl.value;
+  let license_url = response2.query.pages[0].imageinfo[0].extmetadata.LicenseUrl.value;
   let image_Author = getImageAuthor(parse_wikitext);
-  let signature = "By "+image_Author+" under "+image_license + " " + licence_url;
+  let signature = "By "+image_Author+" under "+image_license + " " + license_url;
 
   return new Image(key, url, image, signature);
 }

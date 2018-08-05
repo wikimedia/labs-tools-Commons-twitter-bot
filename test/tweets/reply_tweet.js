@@ -8,7 +8,7 @@ const RequestTweet = require('../../src/tweets/request_tweet');
 const Image = require('../../src/image');
 
 describe('ReplyTweet', () => {
-  let image = new Image('👍', 'http://example.com');
+  let image = new Image('👍', 'http://example.com', 'some_image', 'some_image_signature');
 
   describe('#getText', () => {
     describe('modifier absent', () => {
@@ -20,7 +20,7 @@ describe('ReplyTweet', () => {
       it('should return a tweet', () => {
         let reply_tweet = new ReplyTweet(request_tweet, image);
 
-        assert.equal(reply_tweet.getText(), '@some_screen_name 👍 http://example.com');
+        assert.equal(reply_tweet.getText(), '@some_screen_name 👍 http://example.com some_image_signature');
       });
     });
 
@@ -33,7 +33,7 @@ describe('ReplyTweet', () => {
       it('should return a tweet with the modifier used', () => {
         let reply_tweet = new ReplyTweet(request_tweet, image);
 
-        assert.equal(reply_tweet.getText(), '@some_screen_name 👍🏿 http://example.com');
+        assert.equal(reply_tweet.getText(), '@some_screen_name 👍🏿 http://example.com some_image_signature');
       });
     });
   });

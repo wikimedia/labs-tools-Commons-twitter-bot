@@ -1,4 +1,4 @@
-  'use strict';
+'use strict';
 
 var Twit = require('twit');
 
@@ -18,13 +18,12 @@ const Twitter = {
    }
    catch (err){
     console.log(err);
-   } 
+   }
   },
 
   reply: async (reply_tweet) => {
     try{
       reply_tweet.image.then(async function(value){
-       // console.log(reply_tweet.getEmojiWithModifier());
         let status_update = await reply_tweet.getText();
         update({ status: status_update, in_reply_to_name: reply_tweet.replyScreenName(), 
           key: value.key, image: value.image, in_reply_to_status_id: reply_tweet.getInReplyToStatusID() });
@@ -43,7 +42,6 @@ const Twitter = {
 //makes a new tweet
 async function update(params) {
   var param = await params;
-  console.log(param);
   if(!param.image){
    console.log("Image not defined");
    twit.post('statuses/update', {status: param.in_reply_to_name+" Sorry no image found for "+param.key+" emoji or emoji is blocked", in_reply_to_status_id: param.in_reply_to_status_id},
@@ -53,9 +51,9 @@ async function update(params) {
             console.log(err);
           }
           else{
-            console.log('Posted an reply');
+            console.log('Posted a reply');
           }
-  } 
+  }
    );
   }else{
   twit.post('media/upload', {media_data: param.image}, function (err, data, response) {
@@ -78,7 +76,7 @@ async function update(params) {
             console.log(err);
           }
           else{
-            console.log('Posted an image!');
+            console.log('Post reply succesful!!!');
           }
         }
       );

@@ -1,5 +1,5 @@
 {
-  "name": "NYPL-Emoji-Bot",
+  "name": "WM-Commons-EmojiBot",
   "version": "0.0.0",
   "description": "NYPL Emoji Bot",
   "author": "Lauren Lampasone",
@@ -26,8 +26,7 @@
   "scripts": {
     "test": "`npm bin`/eslint . && `npm bin`/mocha --recursive",
     "status": "`npm bin`/nf run bin/status",
-    "reply": "`npm bin`/nf run bin/reply",
-    "missing": "`npm bin`/nf run bin/missing"
+    "reply": "`npm bin`/nf run bin/reply"
   },
   "directories": {
     "test": "test"

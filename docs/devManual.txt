@@ -1,0 +1,87 @@
+### Installation Process Locally
+
+System requirement
+
+- npm version 6.1.0
+- node version 8.11.1
+- Tested on Ubuntu 16.04
+
+* run 'npm install' in the root directory of the project
+* run 'npm install --save request-promise'
+* set bot credentials in the .env file
+
+### Installation Process on Toolforge
+
+* Toolforge bastion runs an older version of npm and node so you may need to create a virtual enviroment,
+and install the above specified versions on it. (tested with nodeenv and virtualenv)
+
+* Once the versions of node and npm are set in the virtual eniroment, follow same installation process as mentioned above.
+
+	## Setting up the Virtual enviroment on toolforge with virtual env
+	(preferable if your enviroment is in your bot directory e.g bot_dir/virenv)
+
+	* Run this commands for installation
+
+	- sudo pip install virtualenv
+
+	* Create the enviroment
+
+	- virtualenv your_env
+
+	* Activate the enviroment
+
+	- cd your_env/bin/
+	- . activate
+
+	* Deactivate the virtual enviroment
+
+	- cd your_env/bin/
+	- . deactivate
+
+### Usage
+
+- To post a status (make a tweet with random emoji)
+
+* npm run status
+
+- To reply to post (start listening to occuring tweets to the bot and reply to tweet)
+
+* npm start
+
+### Testing (run unit test and output error if any)
+
+* npm test
+
+### Contributing
+
+Emoji additions, bug reports, fixes, and new features are welcomed. If you'd like to contribute code, please:
+
+1.	Clone the project
+
+	```
+	git clone https://gerrit.wikimedia.org/r/labs/tools/Commons-twitter-bot
+	```
+
+2.	Start a branch named for your new feature or bug
+
+	1.  Contibution by adding emoji-images mapping in the data/images.json file
+		==The structure of the json==
+		```
+		"emoji":[
+					"Image_url"
+				]
+		```
+	2.	Contributing by fixing bugs, or improving on the bot code and documentation.
+
+3.	Submit a patch to the gerrit repo
+
+### Deployement on toolforge
+
+1.	Login to your tool on toolforge (See: https://wikitech.wikimedia.org/wiki/Help:Toolforge )
+2.	Create a Virtual environment
+3.	Install node version v8.11.1 and npm version v6.1.0 inside the virtual environment then deactivate the env.
+4.	Write a short script that will cd in the bot directory, activat the virtual enviroment and start the bot
+(see the bot_start_script.sh file for an example script.
+This script should be placed in the $HOME dir on toolforge)
+5.	Make gridengine to run the script as a job using('jstart -N job_name -mem <amt of memory needed e.g 1G> bot_start_script.sh'). Note that on toolforge nodejs jobs require about 1G memory allocation
+to run well with gridengine.

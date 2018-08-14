@@ -8,6 +8,8 @@ The source code for the [WM-Commons-Emoji-Bot](https://gerrit.wikimedia.org/r/#/
 
   ```shell
   npm install
+
+  npm install --save request-promise
   ```
 
 2. Copy the example `.env` file:
@@ -26,7 +28,7 @@ The source code for the [WM-Commons-Emoji-Bot](https://gerrit.wikimedia.org/r/#/
 npm run status
 ```
 
-### To reply to replies
+### To reply to posts
 
 ```shell
 npm run reply
@@ -54,18 +56,11 @@ Emoji additions, bug reports, fixes, and new features are welcomed. If you'd lik
 		==The structure of the json==
 		```
 		"emoji":[
-					"Image_url" 
+					"Image_url"
 				]
 		```
 3. Submit a patch to the gerrit repo
 
-## Deployement on toolforge
+###More info
 
-1. login to your tool on toolforge (See: https://wikitech.wikimedia.org/wiki/Help:Toolforge )
-2. Create a Virtual environment
-3. install node version v8.11.1 and npm version v6.1.0 inside the virtual environment the deactivate the env.
-4. Start the Kubernetes node shell (See: https://wikitech.wikimedia.org/wiki/Help:Toolforge/Web#node.js_web_services )
-5. Inside the shell, activate the virtual environment
-6. Clone the bot and run ```npm install``` in the bot directory
-7. Run the bot as a webservice using kubernetes backend (See: https://wikitech.wikimedia.org/wiki/Help:Toolforge/Web#node.js_web_services ) 
-8. Enjoy! :D.
+See the docs/devManual file for more information.

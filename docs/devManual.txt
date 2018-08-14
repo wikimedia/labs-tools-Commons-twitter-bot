@@ -46,7 +46,7 @@ and install the above specified versions on it. (tested with nodeenv and virtual
 
 - To reply to post (start listening to occuring tweets to the bot and reply to tweet)
 
-* npm start
+* npm run reply
 
 ### Testing (run unit test and output error if any)
 

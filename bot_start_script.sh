@@ -6,5 +6,5 @@
 
 cd /data/project/tool_name/bot_dir/
 . bot_env/bin/activate
-npm start
+npm run reply
 echo 'Done now...'

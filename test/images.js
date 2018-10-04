@@ -2,7 +2,7 @@
 
 const assert = require('assert');
 const Images = require('../src/images');
-const Image = require('../src/image.js');
+//const Image = require('../src/image.js');
 
 describe('Images', () => {
   describe('#getRandom()', () => {

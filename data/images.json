@@ -986,7 +986,9 @@
     "🇨🇰": [],
     "🇨🇱": [],
     "🇨🇲": [],
-    "🇨🇳": [],
+    "🇨🇳": [
+        "https://commons.wikimedia.org/wiki/File:Flag_of_the_People%27s_Republic_of_China.svg"
+    ],
     "🇨🇴": [],
     "🇨🇵": [],
     "🇨🇷": [],
@@ -1048,7 +1050,9 @@
     "🇬🇺": [],
     "🇬🇼": [],
     "🇬🇾": [],
-    "🇭🇰": [],
+    "🇭🇰": [
+        "https://commons.wikimedia.org/wiki/File:Flag_of_Hong_Kong.svg"
+    ],
     "🇭🇲": [],
     "🇭🇳": [],
     "🇭🇷": [],
@@ -1117,7 +1121,9 @@
     "🇲🇱": [],
     "🇲🇲": [],
     "🇲🇳": [],
-    "🇲🇴": [],
+    "🇲🇴": [
+        "https://commons.wikimedia.org/wiki/File:Flag_of_Macau.svg"
+    ],
     "🇲🇵": [],
     "🇲🇶": [],
     "🇲🇷": [],
@@ -2901,11 +2907,15 @@
         "https://digitalcollections.nypl.org/items/510d47e2-e1b9-a3d9-e040-e00a18064a99",
         "https://digitalcollections.nypl.org/items/5e66b3e8-f02e-d471-e040-e00a180654d7"
     ],
-    "💻": [],
+    "💻": [
+        "https://commons.wikimedia.org/wiki/File:Acer_aspire_4930G.jpg"
+    ],
     "💼": [
         "https://digitalcollections.nypl.org/items/510d47e0-f018-a3d9-e040-e00a18064a99"
     ],
-    "💽": [],
+    "💽": [
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/CDV2.jpg/120px-CDV2.jpg"
+    ],
     "💾": [
         "https://digitalcollections.nypl.org/items/a83ee7e0-5388-0135-4d09-75a223cd3e9d"
     ],
@@ -3017,7 +3027,9 @@
         "https://digitalcollections.nypl.org/items/76143366-47f3-a8fa-e040-e00a180608b9"
     ],
     "📟": [],
-    "📠": [],
+    "📠": [
+        "https://commons.wikimedia.org/wiki/File:Fax-amarys.jpg"
+    ],
     "📢": [
         "https://digitalcollections.nypl.org/items/5e66b3e8-8a44-d471-e040-e00a180654d7"    
     ],
@@ -3450,10 +3462,18 @@
     "🖖": [
         "https://digitalcollections.nypl.org/items/152d9370-9f4d-0132-f97d-58d385a7bbd0"
     ],
-    "🖥": [],
-    "🖨": [],
-    "🖱": [],
-    "🖲": [],
+    "🖥": [
+        "https://commons.wikimedia.org/wiki/File:Crystal_Project_computer.png"
+    ],
+    "🖨": [
+        "https://commons.wikimedia.org/wiki/File:Gnome-dev-printer.svg"
+    ],
+    "🖱": [
+        "https://commons.wikimedia.org/wiki/File:3-Tasten-Maus_Microsoft.jpg"
+    ],
+    "🖲": [
+        "https://commons.wikimedia.org/wiki/File:Trackball-Kensington-ExpertMouse5.jpg"
+    ],
     "🖼": [
         "https://digitalcollections.nypl.org/items/5cf22630-9cbc-0131-4c57-58d385a7b928"
     ],
